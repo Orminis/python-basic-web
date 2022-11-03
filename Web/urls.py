@@ -26,4 +26,7 @@ urlpatterns = [
     # urls from second lection
     path('departments/', include('Web.departments_02.urls')),
 
+    # urls from third lection
+    path('models/', include('Web.models_03.urls')),
+
 ]
