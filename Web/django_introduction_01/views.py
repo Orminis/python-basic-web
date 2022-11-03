@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django import http
+
 # Create your views here.
+
 from Web.django_introduction_01.models import Intro
-from templates import django_introduction
+
 
 def does_it_works(request):
     return http.HttpResponse("Does not works")
