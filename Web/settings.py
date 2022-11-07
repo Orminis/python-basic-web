@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Web.django_introduction_01',
     'Web.departments_02',
     'Web.models_03',
+    'Web.forms_04',
 ]
 
 MIDDLEWARE = [

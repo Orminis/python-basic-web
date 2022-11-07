@@ -19,14 +19,16 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # first lection introduction
+    # first lecture introduction
     # SITE_URL/tasks/ (localhost:8000/tasks/)
     path("introduction/", include('Web.django_introduction_01.urls')),
 
-    # urls from second lection
+    # urls from second lecture
     path('departments/', include('Web.departments_02.urls')),
 
-    # urls from third lection
+    # urls from third lecture
     path('models/', include('Web.models_03.urls')),
 
+    # urls from forth lecture
+    path('forms/', include('Web.forms_04.urls')),
 ]

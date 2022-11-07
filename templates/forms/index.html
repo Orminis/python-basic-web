@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms</title>
+
+    <style>
+        form .helptext{
+            display: none;
+        }
+        form label:hover + .helptext{
+            display: block;
+        }
+
+        .form-control {
+            padding: 5px 15px;
+            color: white;
+            background: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<h1>
+    {% if name %}
+        Hello, {{ name }}! Nice to see you!
+    {% else %}
+        Please, enter and send your name ;) Thank you!
+    {% endif %}
+</h1>
+<form method="post" action="{% url 'index forms' %}">
+    {{ form.as_div }}
+    {% csrf_token %}
+    <button>Send Name</button>
+     <input type='submit' value='Send Your Name'> {# other way to create button (oldschool) #}
+</form>
+</body>
+</html>
