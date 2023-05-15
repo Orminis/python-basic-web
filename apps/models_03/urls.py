@@ -1,6 +1,6 @@
 from django.urls import path
 
-from Web.models_03.views import info, show_department, delete_employee
+from apps.models_03.views import info, show_department, delete_employee
 
 urlpatterns = (
     path("", info, name='info'),

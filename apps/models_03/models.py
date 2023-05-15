@@ -1,6 +1,8 @@
 from django.db import models
 
-
+"""
+Django ORM (Object-relational mapping).
+"""
 # Create your models here.
 from django.urls import reverse
 
@@ -36,8 +38,18 @@ class Department(AuditInfoMixin):
 
 class Project(AuditInfoMixin):
     name = models.CharField(max_length=45)
-    code_name = models.CharField(max_length=30, unique=True)
+    code_name = models.CharField(
+        max_length=30,
+        unique=True
+    )
     deadline = models.DateField()
+
+# Class inheriting Enum for specific enum choices.
+# https://stackoverflow.com/questions/54802616/how-can-one-use-enums-as-a-choice-field-in-a-django-model
+# class EmployeeLevel(Enum):
+#     LEVEL_JUNIOR = "Junior"
+#     LEVEL_REGULAR = "Regular"
+#     LEVEL_SENIOR = "Senior"
 
 
 class Employee(AuditInfoMixin):
@@ -49,7 +61,7 @@ class Employee(AuditInfoMixin):
     Employee.objects.raw()      # raw SQL
     etc...
     """
-
+    #
     class Meta:
         ordering = ("years_of_exp", '-birth_date')
 
@@ -65,19 +77,21 @@ class Employee(AuditInfoMixin):
 
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=50)
-    # int > 0
+    # int >= 0
     years_of_exp = models.PositiveIntegerField()
     # Text
     review = models.TextField()
     # Char field with included validator for emails
-    email = models.EmailField()
+    email = models.EmailField(
+        unique=True,
+    )
     # Boolean field (True/False)
     works_full_time = models.BooleanField()
     photo = models.URLField()
     # Date field
     start_date = models.DateField()
     # Date/Time field
-    birth_date = models.DateField()
+    birth_date = models.DateTimeField()
 
     # Can be put in abstract class so every child class to have the same columns.
     # # Automatically filled upon creation of an Employee
@@ -93,22 +107,37 @@ class Employee(AuditInfoMixin):
         verbose_name="Seniority Level"
     )
 
+
+# on_delete has 3 options:
+# * on_delete=models.CASCADE :
+# When the department is deleted all employees will be deleted too.
+# It means all linked rows in the class Employees to the row from Department will be deleted.
+#
+# * on_delete=models.SET_NULL, null=True :
+# Set null: department field for the specific employee will be set to null when his/her department is deleted. It must
+# be accompanied by set=null.
+#
+# * on_delete=models.RESTRICT :
+# Restrict: if any employee is associated to department X, X can't be deleted because an employee is associated to it.
+
     # one-to-many relations
     department = models.ForeignKey(
         to=Department,
-        # when the department is deleted all employees will be deleted too
         on_delete=models.CASCADE,
-        default=0
-        # set null: department field for the specific employee will be set to null when his/her department is deleted
-        # on_delete=models.SET_NULL,
-        # null=True
-        # Restrict: if any employee is associated to department X, X can not be deleted because some employee is associated to it.
-        # on_delete=models.RESTRICT,
     )
 
-    # many-to-many relations        # model to relate,
+    # many-to-many relations
+    # model to relate
     projects = models.ManyToManyField(Project)
 
+    # second way to make many-to-many relations is with option through. In this case we need to make a new junction table
+    # manually which to be used for the relations between the tables. 
+    # projects = models.ManyToManyField(
+    #     Project,
+    #     related_name='employees',
+    #     through='EmployeesProjects'
+    # )
+    # property is not reflected in the DB
     @property
     def fullname(self):
         return f"{self.first_name} {self.last_name}"
@@ -118,7 +147,7 @@ class Employee(AuditInfoMixin):
         return f"ID: {self.pk}; Name: {self.fullname}"
 
 
-# diff between null and blank
+# diff between null and blank, blank is used for form validation, null is for db validation.
 class NullBlankDemo(models.Model):
     # blank = models.IntegerField(
     #     blank=True,
@@ -136,3 +165,34 @@ class NullBlankDemo(models.Model):
         blank=False,
         null=False,
     )
+
+
+# custom junction table for Many to Many relationship.
+class EmployeesProjects(models.Model):
+    employee_id = models.ForeignKey(Employee, on_delete=models.RESTRICT)
+    project_id = models.ForeignKey(Project, on_delete=models.RESTRICT)
+    # additional info
+    date_joined = models.DateField(
+
+    )
+    # after that includes through option in the main
+
+
+class AccessCard(models.Model):
+    employee = models.OneToOneField(
+        Employee,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+
+
+class Category(models.Model):
+    category = models.CharField(
+        max_length=15,
+    )
+
+    # parent_category = models.ForeignKey(
+    #     "apps.models_03.models.Category",
+    #     on_delete=models.CASCADE,
+    # )

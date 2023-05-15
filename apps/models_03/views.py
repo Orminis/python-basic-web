@@ -1,9 +1,7 @@
-from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 
 # Create your views here.
-from Web.models_03.models import Employee, Department
+from apps.models_03.models import Employee, Department
 
 
 def info(request):

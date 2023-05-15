@@ -1,6 +1,6 @@
 from django.urls import path
 
-from Web.departments_02.views import show_departments, show_department_id, redirect_to_first_department, \
+from apps.departments_02.views import show_departments, show_department_id, redirect_to_first_department, \
     show_not_found
 
 urlpatterns = (

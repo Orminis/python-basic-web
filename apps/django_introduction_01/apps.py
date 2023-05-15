@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class Forms04Config(AppConfig):
+class DjangoIntroduction01Config(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Web.forms_04'
+    name = 'apps.django_introduction_01'

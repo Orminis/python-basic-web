@@ -1,6 +1,6 @@
 from django import forms
 
-from Web.forms_04.models import Person
+from apps.forms_04.models import Person
 
 
 class PersonForm(forms.Form):
@@ -15,7 +15,7 @@ class PersonForm(forms.Form):
                            label="Your Name",
                            help_text="Enter your name",
                            widget=forms.TextInput(
-                                # this correspodnds to HTML Attributes
+                                # this corresponds to HTML Attributes
                                 attrs={
                                     'placeholder': "Enter name",
                                     'class': 'form-control',

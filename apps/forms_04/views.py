@@ -1,9 +1,8 @@
-from django import forms
 from django.shortcuts import render
 
 # Create your views here.
-from Web.forms_04.forms import PersonForm, PersonCreateForm
-from Web.forms_04.models import Person, Pet
+from apps.forms_04.forms import PersonForm, PersonCreateForm
+from apps.forms_04.models import Person, Pet
 
 
 def index_forms(request):
@@ -30,7 +29,7 @@ def index_forms(request):
 
 
 def index_model_forms(request):
-    instance = Person.objects.get(pk=1)
+    instance = Person.objects.get(pk=3)
     if request.method == 'GET':
         form = PersonCreateForm(instance=instance)
     else:
@@ -58,5 +57,6 @@ def related_models_demo(request):
     # person.pets  # Person has `pets` field
     # pet.person_set  # Pet has no `person` field
     # print(list(pet.person_set.all()))
+    # to 
     print(list(pet.persons.all()))
     print(list(person.pets.all()))

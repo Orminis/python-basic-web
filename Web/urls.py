@@ -21,14 +21,14 @@ urlpatterns = [
 
     # first lecture introduction
     # SITE_URL/tasks/ (localhost:8000/tasks/)
-    path("introduction/", include('Web.django_introduction_01.urls')),
+    path("introduction/", include('apps.django_introduction_01.urls')),
 
     # urls from second lecture
-    path('departments/', include('Web.departments_02.urls')),
+    path('departments/', include('apps.departments_02.urls')),
 
     # urls from third lecture
-    path('models/', include('Web.models_03.urls')),
+    path('models/', include('apps.models_03.urls')),
 
     # urls from forth lecture
-    path('forms/', include('Web.forms_04.urls')),
+    path('forms/', include('apps.forms_04.urls')),
 ]

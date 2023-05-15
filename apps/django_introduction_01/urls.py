@@ -1,6 +1,6 @@
 from django.urls import path
 
-from Web.django_introduction_01.views import does_it_works, get_all_tasks, index
+from apps.django_introduction_01.views import does_it_works, get_all_tasks, index
 
 urlpatterns = (
     # localhost:8000/tasks/

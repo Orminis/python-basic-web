@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Web.django_introduction_01.models import Intro
+from apps.django_introduction_01.models import Intro
 
 
 @admin.register(Intro)

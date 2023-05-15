@@ -1,6 +1,6 @@
 from django.urls import path
 
-from Web.forms_04.views import index_forms, index_model_forms, related_models_demo
+from apps.forms_04.views import index_forms, index_model_forms, related_models_demo
 
 urlpatterns = (
     path('', index_forms, name='index forms'),

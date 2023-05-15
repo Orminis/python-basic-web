@@ -23,3 +23,8 @@ class Person(models.Model):
     MAX_NAME_LEN = 30
     name = models.CharField(max_length=MAX_NAME_LEN)
     age = models.IntegerField(null=True, blank=True)
+
+    pets = models.ManyToManyField(
+        Pet,
+        related_name='persons',
+    )

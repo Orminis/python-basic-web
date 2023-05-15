@@ -13,7 +13,7 @@
         {% endif %}
     </h2>
 
-    {#<form> == <form action="{% url 'index' %}" method="get">#}
+
     {{ csrf_token }}
 
     <h3>Default form</h3>
@@ -34,6 +34,7 @@
         {% endfor %}
         <button>Send name</button>
         {% csrf_token %}
-        {#    <input type="submit" value="Send name">#}
+        <!-- A little old school -->
+<!--        {# <input type="submit" value="Send name"> #}-->
     </form>
 {% endblock %}
